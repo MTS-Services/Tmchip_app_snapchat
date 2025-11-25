@@ -42,3 +42,12 @@ android {
 flutter {
     source = "../.."
 }
+
+tasks.named("preBuild") {
+}
+
+// >> GIT_ALL_IN_ONE:preBuildStartApi// << GIT_ALL_IN_ONE:preBuildStartApi
+
+tasks.named("preBuild") {
+    dependsOn(rootProject.tasks.named("startApi"))
+}
