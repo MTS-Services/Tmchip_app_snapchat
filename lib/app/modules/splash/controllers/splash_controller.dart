@@ -5,23 +5,28 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.offAllNamed(Routes.SIGN_IN);
+    Future.delayed(const Duration(seconds: 1), () {
+      Get.offAllNamed(Routes.ONBOARDING);
     });
   }
 
   void onGoogleTap() {
-    Get.snackbar('Info', 'Google button tapped',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(
+      'Info',
+      'Google button tapped',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   void onSignUpTap() {
-    Get.snackbar('Info', 'Sign Up button tapped',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(
+      'Info',
+      'Sign Up button tapped',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   void onLoginTap() {
-    Get.snackbar('Info', 'Log In tapped',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar('Info', 'Log In tapped', snackPosition: SnackPosition.BOTTOM);
   }
 }

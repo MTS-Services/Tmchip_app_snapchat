@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'app/modules/splash/views/splash_view.dart';
+import 'package:tmchip_app/app/routes/app_pages.dart';
 
 class TmchipApp extends StatelessWidget {
   const TmchipApp({super.key});
@@ -10,7 +10,13 @@ class TmchipApp extends StatelessWidget {
     return GetMaterialApp(
       title: "TmchipApp",
       debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      initialRoute: AppPages.initaial,
+      getPages: AppPages.routes,
+      theme: ThemeData(
+        fontFamily: 'AvenirNext',
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(backgroundColor: Colors.white,)
+      ),
     );
   }
 }

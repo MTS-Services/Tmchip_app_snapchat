@@ -4,6 +4,7 @@ import 'package:tmchip_app/app/modules/sign_in/views/sign_in_view.dart';
 import 'package:tmchip_app/widget/app_button.dart';
 import '../../../constent/app_color.dart';
 import '../../../constent/asset_path.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/onboarding_controller.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
@@ -16,52 +17,54 @@ class OnboardingView extends GetView<OnboardingController> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(child: Image.asset(AssetPath.snapchatPng, height: 500)),
-
-              SizedBox(height: 25),
-              AppButton(
-                title: "Continue with Google",
-                onPressed: () {},
-                textColor: Colors.black,
-                backgroundColor: Colors.white,
-                icon: Image.asset(AssetPath.googlePng, height: 30, width: 30),
-              ),
-              SizedBox(height: 15),
-              AppButton(
-                title: "Sign Up",
-                onPressed: () {},
-                textColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already Have an Account?",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => SignInView());
-                    },
-                    child: Text(
-                      "Log In",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset(AssetPath.snapchatPng, height: 250),
+                SizedBox(height: 60),
+                AppButton(
+                  title: "Continue with Google",
+                  onPressed: () {},
+                  textColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  icon: Image.asset(AssetPath.googlePng, height: 20, width: 30),
+                ),
+                SizedBox(height: 15),
+                AppButton(
+                  title: "Sign Up",
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  backgroundColor: Colors.blue.shade400,
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already Have an Account?",
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.SIGN_IN);
+                      },
+                      child: Text(
+                        "Log In",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blue.shade600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

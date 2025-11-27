@@ -24,10 +24,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         Text(
           widget.label,
-          style: const TextStyle(
-            color: Colors.blue,
+          style: TextStyle(
+            color: Colors.blue.shade400,
             fontSize: 13,
             letterSpacing: 0.5,
+            fontWeight: FontWeight.w500
           ),
         ),
         const SizedBox(height: 8),
@@ -57,7 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 });
               },
               icon: Icon(
-                isHidden ? Icons.visibility_off : Icons.visibility,
+                isHidden ? Icons.visibility_off : Icons.visibility,color: Colors.grey.shade400
               ),
             )
                 : null,

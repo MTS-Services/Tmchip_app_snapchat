@@ -13,4 +13,5 @@ class AssetPath{
    static String searchPng = "$basePath/search.png";
    static String thunderPng = "$basePath/thunder.png";
    static String chatPng = "$basePath/chat.png";
+   static String galleryPng = "$basePath/icon.png";
 }
