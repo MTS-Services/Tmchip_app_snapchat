@@ -8,7 +8,7 @@ class TmchipApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "TmchipApp",
+      title: "SnapChat",
       debugShowCheckedModeBanner: false,
       initialRoute: AppPages.initaial,
       getPages: AppPages.routes,

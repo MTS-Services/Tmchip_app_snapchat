@@ -1,13 +1,12 @@
 name: tmchip_app
 description: "A new Flutter project."
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.9.2
-
 
 dependencies:
   flutter:
@@ -17,23 +16,24 @@ dependencies:
   get: ^4.7.2
   camera: ^0.11.3
   image_picker: ^1.2.1
+  flutter_svg: ^2.2.3
+  shared_preferences: ^2.5.3
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   flutter_lints: ^5.0.0
 
-
 flutter:
-
   uses-material-design: true
-
 
   assets:
     - assets/image/
     - assets/font/
+    - assets/icons/
+    # - assets/bitmojis/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -72,7 +72,7 @@ class SignInView extends GetView<SignInController> {
 
                           // Navigate after 500ms
                           Future.delayed(Duration(milliseconds: 500), () {
-                            Get.toNamed(Routes.BOTTOM_NAVIGATION);
+                            Get.toNamed(Routes.EXPLORE);
                           });
                         }
                       },
