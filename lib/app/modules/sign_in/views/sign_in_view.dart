@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tmchip_app/app/constent/app_color.dart';
 import 'package:tmchip_app/app/constent/asset_path.dart';
@@ -14,138 +15,141 @@ class SignInView extends GetView<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 30,
-        leading: GestureDetector(
-          onTap: Get.back,
-          child: Icon(
-            Icons.arrow_back_ios_rounded,
-            size: 16,
-            color: Colors.grey,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        appBar: AppBar(
+          leadingWidth: 30,
+          leading: GestureDetector(
+            onTap: Get.back,
+            child: Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 16,
+              color: Colors.grey,
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                SizedBox(height: 60),
-                Center(
-                  child: Text(
-                    "Log In",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: [
+                  SizedBox(height: 60),
+                  Center(
+                    child: Text(
+                      "Log In",
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-                SizedBox(height: 20),
-                CustomTextField(
-                  label: "USERNAME OR EMAIL",
-                  controller: controller.emailController,
-                  obscureText: false,
-                ),
-                SizedBox(height: 20),
-                CustomTextField(
-                  label: "PASSWORD",
-                  controller: controller.passwordController,
-                  obscureText: true,
-                ),
-                SizedBox(height: 35),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Obx(() {
-                    final canLogin = controller.email.value.isNotEmpty &&
-                        controller.password.value.isNotEmpty;
-
-                    // When temp loader ON → force background back to primary
-                    final effectiveBackground = controller.showTempLoader.value
-                        ? AppColors.primary
-                        : (canLogin ? Colors.blue.shade400 : AppColors.primary);
-
+                  SizedBox(height: 20),
+                  CustomTextField(
+                    label: "USERNAME OR EMAIL",
+                    controller: controller.emailController,
+                    obscureText: false,
+                  ),
+                  SizedBox(height: 20),
+                  CustomTextField(
+                    label: "PASSWORD",
+                    controller: controller.passwordController,
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 35),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Obx(() {
+                      final canLogin = controller.email.value.isNotEmpty &&
+                          controller.password.value.isNotEmpty;
+      
+                      // When temp loader ON → force background back to primary
+                      final effectiveBackground = controller.showTempLoader.value
+                          ? AppColors.primary
+                          : (canLogin ? Colors.blue.shade400 : AppColors.primary);
+      
+                      return AppButton(
+                        title: "Log In",
+      
+                        onPressed: () {
+                          if (canLogin) {
+                            controller.showLoaderFor500ms();  // starts temp loader
+      
+                            // Navigate after 500ms
+                            Future.delayed(Duration(milliseconds: 500), () {
+                              Get.toNamed(Routes.EXPLORE);
+                            });
+                          }
+                        },
+                        icon: controller.showTempLoader.value
+                            ? DualLoader(size: 18, color1: Colors.white, color2: Colors.white70)
+                            : null,
+      
+                        isLoading: false,
+                        backgroundColor: effectiveBackground,
+                        disabledBackColor: effectiveBackground,
+                      );
+                    }),
+      
+      
+                  ),
+                  SizedBox(height: 35),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: const Text(
+                        "Forgot Your Password?",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 90),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.2,
+                          color: Colors.grey.shade400,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text("OR", style: TextStyle(color: Colors.grey)),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.2,
+                          color: Colors.grey.shade400,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Obx(() {
                     return AppButton(
-                      title: "Log In",
-
-                      onPressed: () {
-                        if (canLogin) {
-                          controller.showLoaderFor500ms();  // starts temp loader
-
-                          // Navigate after 500ms
-                          Future.delayed(Duration(milliseconds: 500), () {
-                            Get.toNamed(Routes.EXPLORE);
-                          });
-                        }
-                      },
-                      icon: controller.showTempLoader.value
-                          ? DualLoader(size: 18, color1: Colors.white, color2: Colors.white70)
-                          : null,
-
-                      isLoading: false,
-                      backgroundColor: effectiveBackground,
-                      disabledBackColor: effectiveBackground,
+                      title: "Continue with Google",
+                      onPressed: controller.loginWithGoogle,
+                      isLoading: controller.isGoogleLoading.value,
+                      backgroundColor: AppColors.accent,
+                      icon: Image.asset(
+                        AssetPath.googlePng,
+                        height: 30,
+                        width: 30,
+                      ),
                     );
                   }),
-
-
-                ),
-                SizedBox(height: 35),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: const Text(
-                      "Forgot Your Password?",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  SizedBox(height: 100),
+                  Obx(
+                    () => buildCheckBox(
+                      value: controller.saveLogin.value,
+                      label: "Save Login Info on your device",
+                      onChanged: controller.toggleSaveLogin,
                     ),
                   ),
-                ),
-                SizedBox(height: 90),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 1.2,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text("OR", style: TextStyle(color: Colors.grey)),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1.2,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Obx(() {
-                  return AppButton(
-                    title: "Continue with Google",
-                    onPressed: controller.loginWithGoogle,
-                    isLoading: controller.isGoogleLoading.value,
-                    backgroundColor: AppColors.accent,
-                    icon: Image.asset(
-                      AssetPath.googlePng,
-                      height: 30,
-                      width: 30,
-                    ),
-                  );
-                }),
-                SizedBox(height: 100),
-                Obx(
-                  () => buildCheckBox(
-                    value: controller.saveLogin.value,
-                    label: "Save Login Info on your device",
-                    onChanged: controller.toggleSaveLogin,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

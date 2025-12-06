@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,8 +19,18 @@ class ExploreController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    setDarkStatusBar();
     initCamera();
     loadSavedImage();
+  }
+  void setDarkStatusBar() {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light, // White icons
+        statusBarBrightness: Brightness.dark, // For iOS
+      ),
+    );
   }
 
   Future<void> pickImage() async {

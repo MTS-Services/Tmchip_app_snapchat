@@ -12,6 +12,15 @@ class ExploreView extends GetView<ExploreController> {
 
   @override
   Widget build(BuildContext context) {
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   SystemChrome.setSystemUIOverlayStyle(
+    //     SystemUiOverlayStyle(
+    //       statusBarColor: Colors.black,
+    //       statusBarIconBrightness: Brightness.light,
+    //       statusBarBrightness: Brightness.dark,
+    //     ),
+    //   );
+    // });
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.black, // Background color
@@ -19,6 +28,8 @@ class ExploreView extends GetView<ExploreController> {
         statusBarBrightness: Brightness.dark, // iOS → White icons
       ),
       child: Scaffold(
+        backgroundColor: Colors.black,
+        extendBody: true,
         body: SafeArea(
           child: Obx(() {
             return Stack(
